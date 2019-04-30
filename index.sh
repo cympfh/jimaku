@@ -1,3 +1,12 @@
+#!/bin/bash
+
+if [ ! -f ~/.kirara ]; then
+    echo "Not found ~/.kirara"
+    exit 1
+fi
+source ~/.kirara
+
+cat <<EOM
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +39,11 @@
       str_interim = '';
       localStorage.setItem('str_prev', str_prev);
       localStorage.setItem('str', str);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://s.cympfh.cc/live/cympfh');
+      xhr.setRequestHeader('X-KEY', '${IK_KEY}');
+      xhr.send(text);
     }
 
     var SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
@@ -106,3 +120,4 @@
   <div id="jimaku_interim"></div>
 </body>
 </html>
+EOM

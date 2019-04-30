@@ -1,4 +1,5 @@
 server:
+	bash index.sh > index.html
 	python ./https_server.py
 
 cert:
