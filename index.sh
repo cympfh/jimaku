@@ -85,6 +85,9 @@ cat <<EOM
     recognition.start();
   </script>
 <style>
+    body {
+      background-color: #00ff00;
+    }
     div#jimaku_prev {
       font-size: 13px;
       color: #884488; font-weight: bold; font-size: 18px;
