@@ -6,7 +6,7 @@ import click
 
 @click.command()
 @click.option('--host', '-H', type=str, default='localhost')
-@click.option('--port', '-P', type=int, default=8000)
+@click.option('--port', '-P', type=int, default=8080)
 def main(host, port):
     ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ctx.load_cert_chain('server.crt', keyfile='server.key')

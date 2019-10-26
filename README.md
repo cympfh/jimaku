@@ -11,15 +11,24 @@ Create `server.key` and `server.crt`
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout server.key -out server.crt -subj "/CN=example.com" -days 3650
 ```
 
+Make index.html page
+
+```bash
+bash ./index.sh ja-JP
+
+# or
+bash ./index.sh en-US
+```
+
 Then launch a server
 
 ```bash
 # maker server
 pip install click
-python3 ./https_server.py -P 8000
+python3 ./https_server.py -P 8080
 # python3 ./https_server.py --help
 ```
 
-## Open HTML page
+## Open browser
 
-Open `index.html` with Google Chrome (not Firefox, not Chromium), and speech!
+Open `https://localhost:8080` with Google Chrome (not Firefox, not Chromium), and speech!

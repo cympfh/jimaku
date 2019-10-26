@@ -1,8 +1,24 @@
+#!/bin/bash
+
+SPEECH_LANG=
+case "$1" in
+  ja | jp | ja-JP )
+    SPEECH_LANG=ja-JP
+    ;;
+  en | us | en-US )
+    SPEECH_LANG=en-US
+    ;;
+  * )
+    SPEECH_LANG=$1
+    ;;
+esac
+
+cat <<EOM > index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Speech-to-Text</title>
+  <title>Speech-to-Text ($SPEECH_LANG)</title>
   <script>
 
     var str_prev = localStorage.getItem('str_prev') || '';
@@ -34,7 +50,7 @@
 
     var SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
     var recognition = new SpeechRecognition();
-    recognition.lang = 'ja-JP'; // 'en-US'
+    recognition.lang = '$SPEECH_LANG';
     recognition.interimResults = true;
     recognition.continuous = true;
 
@@ -106,3 +122,4 @@
   <div id="jimaku_interim"></div>
 </body>
 </html>
+EOM
