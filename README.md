@@ -14,10 +14,10 @@ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout server.key -out server
 Make index.html page
 
 ```bash
-bash ./index.sh ja-JP
+bash ./index.sh --lang <SPEECH_LANG> --bgcolor <BGCOLOR>
 
-# or
-bash ./index.sh en-US
+bash ./index.sh --lang ja-JP --bgcolor green
+bash ./index.sh --lang en-US --bgcolor white
 ```
 
 Then launch a server

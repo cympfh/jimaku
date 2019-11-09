@@ -1,17 +1,39 @@
 #!/bin/bash
 
-SPEECH_LANG=
-case "$1" in
-  ja | jp | ja-JP )
-    SPEECH_LANG=ja-JP
-    ;;
-  en | us | en-US )
-    SPEECH_LANG=en-US
-    ;;
-  * )
-    SPEECH_LANG=$1
-    ;;
-esac
+SPEECH_LANG=ja-JP
+BGCOLOR=white
+
+while [ $# -gt 0 ]; do
+
+  case "$1" in
+    --lang )
+      case "$2" in
+        ja | jp | ja-JP )
+          SPEECH_LANG=ja-JP
+          ;;
+        en | us | en-US )
+          SPEECH_LANG=en-US
+          ;;
+        * )
+          SPEECH_LANG=$2
+          ;;
+      esac
+      shift 2
+      ;;
+
+    --bg-color | --bgcolor )
+      BGCOLOR=$2
+      shift 2
+      ;;
+
+  esac
+
+done
+
+cat <<EOM
+SPEECH_LANG=$SPEECH_LANG
+BGCOLOR=$BGCOLOR
+EOM
 
 cat <<EOM > index.html
 <!DOCTYPE html>
@@ -87,6 +109,9 @@ cat <<EOM > index.html
     recognition.start();
   </script>
 <style>
+    body {
+      background-color: $BGCOLOR ;
+    }
     div#jimaku_prev {
       font-size: 13px;
       color: #884488; font-weight: bold; font-size: 18px;
