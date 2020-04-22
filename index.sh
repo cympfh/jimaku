@@ -46,6 +46,7 @@ cat <<EOM > index.html
     var str_prev = localStorage.getItem('str_prev') || '';
     var str = localStorage.getItem('str') || '';
     var str_interim = '';
+    var aliveness = 10;
 
     function update() {
       document.getElementById('jimaku_prev').innerHTML = str_prev;
@@ -95,6 +96,7 @@ cat <<EOM > index.html
     };
 
     recognition.onresult = (event) => {
+      aliveness = 10;
       for (var i = event.resultIndex; i < event.results.length; i++){
         if (event.results[i].isFinal){
           echo(event.results[i][0].transcript);
@@ -105,6 +107,12 @@ cat <<EOM > index.html
         }
       }
     };
+
+    setInterval(() => {
+      aliveness -= 1;
+      console.log('aliveness', aliveness);
+      if (aliveness < 0) location.reload();
+    }, 500);
 
     recognition.start();
   </script>
